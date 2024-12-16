@@ -1,0 +1,15 @@
+# Changes here will be overwritten by Copier
+_commit: v0.2.0
+_src_path: gh:alan-turing-institute/python-project-template
+coc: our_coc
+email: dga.1984@gmail.com
+full_name: David Alexander
+license: MIT
+min_python_version: '3.10'
+org: DGalexander
+project_name: osdata-utils
+project_short_description: A python package to query and process Ordnance Survey data
+    via the OSDataHub API
+python_name: osdata_utils
+typing: loose
+url: https://github.com/DGalexander/osdata-utils
