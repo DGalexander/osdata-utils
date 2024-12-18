@@ -44,7 +44,7 @@ OS Data Downloader integrates seamlessly with both MapReader workflows and indep
 * Use Rasterio to extract bounding box and CRS from TIFF files.
 * Works independently of MapReader.
 
-See [tests/test_osdata_mapreader_integration.ipynb](tests/test_osdata_mapreader_integration.ipynb) for example workflows.
+See [tests/test_osdata_mapreader_integration.ipynb](test_osdata_mapreader_integration.ipynb) for example workflows.
 
 
 ### Supported Datasets
