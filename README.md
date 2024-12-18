@@ -31,6 +31,22 @@ python -m pip install .
 
 ## Usage
 
+#### Workflow Options
+OS Data Downloader integrates seamlessly with both MapReader workflows and independent TIFF-based workflows:
+
+1. MapReader Integration:
+
+* Extract bounding boxes directly from the maps.parents object.
+* Leverages metadata from MapReader for spatial queries.
+
+2. TIFF-Based Workflow:
+
+* Use Rasterio to extract bounding box and CRS from TIFF files.
+* Works independently of MapReader.
+
+See [tests/test_osdata_mapreader_integration.ipynb](tests/test_osdata_mapreader_integration.ipynb) for example workflows.
+
+
 ### Supported Datasets
 
 The package includes access to the following datasets:
