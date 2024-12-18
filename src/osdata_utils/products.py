@@ -1,4 +1,4 @@
-# Copied from web, needs checking
+# Copied from web, needs checking, need to add more products
 
 PRODUCTS = {
     "zoomstack_urban_areas": {
