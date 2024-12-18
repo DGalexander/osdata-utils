@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/osdata_utils/__init__.py
+src/osdata_utils/downloader.py
+src/osdata_utils/products.py
+src/osdata_utils/py.typed
+src/osdata_utils/utils.py
+src/osdata_utils.egg-info/PKG-INFO
+src/osdata_utils.egg-info/SOURCES.txt
+src/osdata_utils.egg-info/dependency_links.txt
+src/osdata_utils.egg-info/requires.txt
+src/osdata_utils.egg-info/top_level.txt

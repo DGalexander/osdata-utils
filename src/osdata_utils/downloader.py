@@ -124,35 +124,50 @@ class OSDataDownloader:
 
     def download_os_data(
         self,
-        tiff_path,
-        product_name,
+        tiff_path=None,
+        product_name=None,
         output_file=None,
         product_filter=None,
         type_filter=None,
+        bbox=None,
+        crs="EPSG:27700"
     ):
         """
-        Download Ordnance Survey open data for the specified TIFF and product.
+        Download Ordnance Survey open data for the specified bounding box and product.
 
         Parameters:
-        - tiff_path: Path to the TIFF file.
+        - tiff_path: Optional path to a TIFF file.
         - product_name: The OS open data product to query.
         - output_file: Optional path to save the queried data.
-        - product_filter: The name of the OS open data product to filter.
+        - product_filter: Optional filter for product type.
         - type_filter: Optional filter for the 'Type' column in the GeoDataFrame.
+        - bbox: Bounding box as (xmin, ymin, xmax, ymax) in the specified CRS.
+        - crs: Coordinate reference system of the bounding box.
 
         Returns:
         - gdf: GeoDataFrame with the queried data or None if no data is found.
         """
-        metadata = self.get_tiff_metadata(tiff_path)
-        bbox_27700 = self.transform_bounding_box(
-            metadata["bounding_box"], from_crs=metadata["crs"], to_crs="EPSG:27700"
+        if bbox is None and tiff_path is None:
+            raise ValueError("Either bbox or tiff_path must be provided.")
+        
+        if bbox is None:
+            # Extract bounding box and CRS from TIFF if not provided
+            metadata = self.get_tiff_metadata(tiff_path)
+            bbox = self.transform_bounding_box(
+                metadata["bounding_box"], from_crs=metadata["crs"], to_crs=crs
+            )
+
+        # Initialize FeaturesAPI with the bounding box
+        features_api = self.initialize_features_api(
+            product_name=product_name,
+            extent=bbox,
+            crs=crs,
         )
 
-        features_api = self.initialize_features_api(
-            product_name, extent=bbox_27700, crs="EPSG:27700"
-        )
+        # Query the data
         gdf = self.query_os_data(features_api, product_filter, type_filter=type_filter)
 
+        # Save the GeoDataFrame if an output file is provided
         if gdf is not None and output_file:
             gdf.to_file(
                 output_file,
@@ -160,5 +175,4 @@ class OSDataDownloader:
                 if output_file.endswith(".geojson")
                 else "ESRI Shapefile",
             )
-
         return gdf
